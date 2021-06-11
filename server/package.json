@@ -32,6 +32,7 @@
     "ts-jest": "^27.0.3"
   },
   "_moduleAliases": {
-    "@app": "src/app.ts"
+    "@app": "src/app.ts",
+    "@services": "src/services/index.ts"
   }
 }
