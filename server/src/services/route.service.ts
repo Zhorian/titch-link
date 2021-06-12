@@ -1,7 +1,7 @@
-import { Express, Request, Response } from 'express';
+import { Express } from 'express';
 import { inject, injectable } from 'inversify';
-import { IConfigService } from './config.service';
-import { TYPES } from '../types';
+import { TYPES } from '@types';
+import { IPingRouter, IRootRouter } from '@routing';
 
 export interface IRouteService {
   setupRoutes: (app: Express) => void;
@@ -9,17 +9,18 @@ export interface IRouteService {
 
 @injectable()
 export class RouteService implements IRouteService {
-  private readonly configService: IConfigService;
+  private readonly pingRouter: IPingRouter;
+  private readonly rootRouter: IRootRouter;
 
-  constructor(@inject(TYPES.ConfigService) configService: IConfigService) {
-    this.configService = configService;
+  constructor(
+    @inject(TYPES.PingRouter) pingRouter: IPingRouter,
+    @inject(TYPES.RootRouter) rootRouter: IRootRouter) {
+    this.pingRouter = pingRouter;
+    this.rootRouter = rootRouter;
   }
 
   setupRoutes = (app: Express) => {
-    app.get('/', (req: Request, res: Response) => {
-      res.send({
-        message: this.configService.rootGreeting,
-      });
-    });
+    app.use('/api', this.rootRouter.router);
+    app.use('/api/ping', this.pingRouter.router);
   };
 }

@@ -15,8 +15,20 @@
       "@app": [
         "app.ts"
       ],
+      "@controllers": [
+        "controllers/index.ts"
+      ],
+      "@di": [
+        "di.ts"
+      ],
+      "@routing": [
+        "routing/index.ts"
+      ],
       "@services": [
         "services/index.ts"
+      ],
+      "@types": [
+        "types.ts"
       ]
     },
     "resolveJsonModule": true,
