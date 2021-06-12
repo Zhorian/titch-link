@@ -1,4 +1,4 @@
-import { Response } from 'supertest'
+import { Response } from 'supertest';
 import testRequest from '../test-request';
 
 describe('/api', () => {

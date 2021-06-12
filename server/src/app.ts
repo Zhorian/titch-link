@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { IConfigService, IRouteService } from '@services';
-import { TYPES } from './types';
+import { TYPES } from '@types';
 
 export interface IApp {
   readonly app: Express

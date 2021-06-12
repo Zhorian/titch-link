@@ -10,11 +10,13 @@ export interface IRouteService {
 @injectable()
 export class RouteService implements IRouteService {
   private readonly pingRouter: IPingRouter;
+
   private readonly rootRouter: IRootRouter;
 
   constructor(
     @inject(TYPES.PingRouter) pingRouter: IPingRouter,
-    @inject(TYPES.RootRouter) rootRouter: IRootRouter) {
+    @inject(TYPES.RootRouter) rootRouter: IRootRouter,
+  ) {
     this.pingRouter = pingRouter;
     this.rootRouter = rootRouter;
   }

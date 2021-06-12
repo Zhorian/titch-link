@@ -23,6 +23,8 @@ export class RootController implements IRootController {
   };
 
   post = async (req: Request, res: Response) => {
-    res.send({ url: 'some-url' })
+    const { serverHost } = this.configService;
+
+    res.send({ url: serverHost });
   };
 }

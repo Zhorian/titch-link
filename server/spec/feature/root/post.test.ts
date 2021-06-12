@@ -1,4 +1,4 @@
-import { Response } from 'supertest'
+import { Response } from 'supertest';
 import testRequest from '../test-request';
 
 describe('/api', () => {
@@ -15,9 +15,9 @@ describe('/api', () => {
     expect(subject.status).toBe(200);
   });
 
-  it('returns an object with a message property', () => {
+  it('returns an object the titched url', () => {
     expect(subject.body).toStrictEqual({
-      url: 'some-url',
+      url: 'https://titchlink.com',
     });
   });
 });

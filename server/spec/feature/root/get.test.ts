@@ -1,4 +1,4 @@
-import { Response } from 'supertest'
+import { Response } from 'supertest';
 import testRequest from '../test-request';
 
 describe('/api', () => {
@@ -17,7 +17,7 @@ describe('/api', () => {
 
   it('returns an object with a message property', () => {
     expect(subject.body).toStrictEqual({
-      message: 'Greetings from the config service! Now with aliases!!!',
+      message: 'Greetings from mock config!',
     });
   });
 });
