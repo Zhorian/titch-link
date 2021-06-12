@@ -1,4 +1,4 @@
-import { IConfigService } from '@services';
+import { IConfigService, ILinkKeyGeneratorService } from '@services';
 import TYPES from '@types';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
@@ -12,8 +12,14 @@ export interface IRootController {
 export class RootController implements IRootController {
   private readonly configService: IConfigService;
 
-  constructor(@inject(TYPES.ConfigService) configService: IConfigService) {
+  private readonly linkKeyGeneratorService: ILinkKeyGeneratorService;
+
+  constructor(
+    @inject(TYPES.ConfigService) configService: IConfigService,
+    @inject(TYPES.LinkKeyGeneratorService) linkKeyGeneratorService: ILinkKeyGeneratorService,
+  ) {
     this.configService = configService;
+    this.linkKeyGeneratorService = linkKeyGeneratorService;
   }
 
   index = async (req: Request, res: Response) => {
@@ -24,7 +30,8 @@ export class RootController implements IRootController {
 
   post = async (req: Request, res: Response) => {
     const { serverHost } = this.configService;
+    const key = this.linkKeyGeneratorService.generateLinkKey();
 
-    res.send({ url: serverHost });
+    res.send({ url: `${serverHost}/${key}` });
   };
 }

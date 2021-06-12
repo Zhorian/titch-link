@@ -7,7 +7,7 @@ import {
 } from '@controllers';
 import { TYPES } from '@types';
 import {
-  IConfigService, ConfigService, IRouteService, RouteService,
+  IConfigService, ConfigService, IRouteService, RouteService, ILinkKeyGeneratorService, LinkKeyGeneratorService,
 } from '@services';
 import {
   IPingRouter, PingRouter,
@@ -18,6 +18,10 @@ const DIContainer = new Container();
 DIContainer.bind<IApp>(TYPES.App).to(App).inSingletonScope();
 DIContainer.bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 DIContainer.bind<IRouteService>(TYPES.RouteService).to(RouteService).inSingletonScope();
+DIContainer
+  .bind<ILinkKeyGeneratorService>(TYPES.LinkKeyGeneratorService)
+  .to(LinkKeyGeneratorService)
+  .inSingletonScope();
 
 DIContainer.bind<IPingController>(TYPES.PingController).to(PingController).inSingletonScope();
 DIContainer.bind<IRootController>(TYPES.RootController).to(RootController).inSingletonScope();
