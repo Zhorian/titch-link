@@ -10,7 +10,7 @@ import {
   IConfigService, ConfigService,
   IRouteService, RouteService,
   ILinkKeyGeneratorService, LinkKeyGeneratorService,
-  IStorageService, StorageService,
+  IStorageService, StorageService, ISwaggerService, SwaggerService,
 } from '@services';
 import {
   IPingRouter, PingRouter,
@@ -22,6 +22,7 @@ DIContainer.bind<IApp>(TYPES.App).to(App).inSingletonScope();
 DIContainer.bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 DIContainer.bind<IRouteService>(TYPES.RouteService).to(RouteService).inSingletonScope();
 DIContainer.bind<IStorageService>(TYPES.StorageService).to(StorageService).inSingletonScope();
+DIContainer.bind<ISwaggerService>(TYPES.SwaggerService).to(SwaggerService).inSingletonScope();
 DIContainer
   .bind<ILinkKeyGeneratorService>(TYPES.LinkKeyGeneratorService)
   .to(LinkKeyGeneratorService)

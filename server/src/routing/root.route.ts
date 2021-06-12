@@ -20,6 +20,27 @@ export class RootRouter {
   }
 
   private setupRouter = () => {
+    /**
+     * @swagger
+     * /:
+     *  get:
+     *    description: Gets the url back using the key.
+     *    tags: [google]
+     *    parameters:
+     *      - in: query
+     *        name: k
+     *        required: true
+     *        description: The key the url is stored with
+     *    responses:
+     *      200:
+     *        description: Success
+     *        schema:
+     *          $ref: "#/definitions/TitchLink"
+     *      400:
+     *        description: No key provided
+     *      404:
+     *        description: No url found with key
+     */
     this.router.get('/', this.controller.index);
     this.router.post('/', this.controller.post);
   };
