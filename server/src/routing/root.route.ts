@@ -25,7 +25,7 @@ export class RootRouter {
      * /:
      *  get:
      *    description: Gets the url back using the key.
-     *    tags: [google]
+     *    tags: []
      *    parameters:
      *      - in: query
      *        name: k
@@ -42,6 +42,30 @@ export class RootRouter {
      *        description: No url found with key
      */
     this.router.get('/', this.controller.index);
+
+    /**
+     * @swagger
+     * /:
+     *  post:
+     *    description: Gets the url back using the key.
+     *    tags: []
+     *    parameters:
+     *      - in: body
+     *        required: true
+     *        description: Object containing the url to shrink
+     *        schema:
+     *          $ref: "#/definitions/TitchLink"
+     *    responses:
+     *      200:
+     *        description: Success
+     *        schema:
+     *          type: object
+     *          properties:
+     *            url:
+     *              type: string
+     *      400:
+     *        description: No key provided
+     */
     this.router.post('/', this.controller.post);
   };
 }
