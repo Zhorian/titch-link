@@ -4,6 +4,7 @@ export const TYPES = {
   ConfigService: Symbol.for('ConfigService'),
   LinkKeyGeneratorService: Symbol.for('LinkKeyGeneratorService'),
   RouteService: Symbol.for('RouteService'),
+  StorageService: Symbol.for('StorageService'),
 
   PingController: Symbol.for('PingController'),
   RootController: Symbol.for('RootController'),

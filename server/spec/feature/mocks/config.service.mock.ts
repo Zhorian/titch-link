@@ -11,6 +11,8 @@ export class MockedConfigService implements IConfigService {
   readonly rootGreeting = 'Greetings from mock config!'
 
   readonly serverHost = 'https://titchlink.com'
+
+  readonly storagePath = './storage/test'
 }
 
 export default MockedConfigService;
