@@ -1,18 +1,14 @@
-import 'reflect-metadata';
-import request, { Response } from 'supertest';
-import { IApp } from '@app';
-import DIContainer from '@di';
-import { TYPES } from '@types';
+import { Response } from 'supertest'
+import testRequest from '../test-request';
 
-describe('/api/ping', () => {
+describe('/api', () => {
   let subject: Response;
+  const url: string = '/api/ping';
 
   beforeAll(async () => {
     jest.clearAllMocks();
 
-    const appInitialiser = DIContainer.get<IApp>(TYPES.App);
-
-    subject = await request(appInitialiser.app).get('/api/ping');
+    subject = await testRequest.get(url);
   });
 
   it('returns 200', () => {

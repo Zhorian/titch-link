@@ -5,6 +5,7 @@ import { inject, injectable } from 'inversify';
 
 export interface IRootController {
   index: (req: Request, res: Response) => Promise<void>;
+  post: (req: Request, res: Response) => Promise<void>;
 }
 
 @injectable()
@@ -19,5 +20,9 @@ export class RootController implements IRootController {
     const { rootGreeting } = this.configService;
 
     res.send({ message: rootGreeting });
+  };
+
+  post = async (req: Request, res: Response) => {
+    res.send({ url: 'some-url' })
   };
 }

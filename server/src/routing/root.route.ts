@@ -21,5 +21,7 @@ export class RootRouter {
 
   private setupRouter = () => {
     this.router.get('/', this.controller.index);
+    this.router.post('/', this.controller.post);
+
   };
 }

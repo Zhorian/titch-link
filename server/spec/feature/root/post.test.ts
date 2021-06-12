@@ -8,7 +8,7 @@ describe('/api', () => {
   beforeAll(async () => {
     jest.clearAllMocks();
 
-    subject = await testRequest.get(url);
+    subject = await testRequest.post(url);
   });
 
   it('returns 200', () => {
@@ -17,7 +17,7 @@ describe('/api', () => {
 
   it('returns an object with a message property', () => {
     expect(subject.body).toStrictEqual({
-      message: 'Greetings from the config service! Now with aliases!!!',
+      url: 'some-url',
     });
   });
 });
