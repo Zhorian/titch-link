@@ -72,6 +72,9 @@ export class RootController implements IRootController {
 
     this.storageService.save(`${key}.json`, JSON.stringify(linkModel));
 
+    // Potentially this could do the redirecting itself
+    // but this has been built as an api meaning I don't
+    // see that as appropriate.
     res.send({ url: `${serverHost}/api?k=${key}` });
   };
 }
