@@ -1,5 +1,6 @@
 import { IConfigService } from '@services';
 import { injectable } from 'inversify';
+import StorageHelper from '../../helpers/storage.helper';
 
 // Mocking the config for all tests
 @injectable()
@@ -12,7 +13,12 @@ export class MockedConfigService implements IConfigService {
 
   readonly serverHost = 'https://titchlink.com'
 
-  readonly storagePath = './storage/test'
+  readonly storagePath;
+
+  constructor() {
+    const storageHelper = new StorageHelper();
+    this.storagePath = storageHelper.DIRECTORY;
+  }
 }
 
 export default MockedConfigService;

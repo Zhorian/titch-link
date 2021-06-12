@@ -1,7 +1,8 @@
 import { IConfigService, StorageService } from '@services';
 import fs from 'fs';
+import { StorageHelper } from '../../helpers/storage.helper';
 
-const FILE_PATH = './storage/test';
+const storageHelper = new StorageHelper();
 
 describe('StorageService', () => {
   const config: IConfigService = {
@@ -9,23 +10,17 @@ describe('StorageService', () => {
     port: 0,
     nodeEnvironment: 'test',
     serverHost: '',
-    storagePath: FILE_PATH,
+    storagePath: storageHelper.DIRECTORY,
   };
   const subject = new StorageService(config);
 
   beforeEach(() => {
-    if (fs.existsSync(FILE_PATH)) {
-      const files = fs.readdirSync(FILE_PATH);
-
-      files.forEach((file) => {
-        fs.unlinkSync(`${FILE_PATH}/${file}`);
-      });
-    }
+    storageHelper.purgeStorage();
   });
 
   describe('save', () => {
     const fileName = 'my-file.json';
-    const fullFilePath = `${FILE_PATH}/${fileName}`;
+    const fullFilePath = `${storageHelper.DIRECTORY}/${fileName}`;
     const content = { foo: 'bar' };
 
     beforeEach(() => {
@@ -57,7 +52,7 @@ describe('StorageService', () => {
 
     describe('does find file', () => {
       const fileName = 'some-file.json';
-      const fullFilePath = `${FILE_PATH}/${fileName}`;
+      const fullFilePath = `${storageHelper.DIRECTORY}/${fileName}`;
       const content = { ping: 'pong' };
       let val: any;
 

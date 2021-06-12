@@ -1,4 +1,5 @@
-import { IConfigService, ILinkKeyGeneratorService } from '@services';
+import { ITitchLinkModel } from '@models';
+import { IConfigService, ILinkKeyGeneratorService, IStorageService } from '@services';
 import TYPES from '@types';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
@@ -14,12 +15,16 @@ export class RootController implements IRootController {
 
   private readonly linkKeyGeneratorService: ILinkKeyGeneratorService;
 
+  private readonly storageService: IStorageService;
+
   constructor(
     @inject(TYPES.ConfigService) configService: IConfigService,
     @inject(TYPES.LinkKeyGeneratorService) linkKeyGeneratorService: ILinkKeyGeneratorService,
+    @inject(TYPES.StorageService) storageService: IStorageService,
   ) {
     this.configService = configService;
     this.linkKeyGeneratorService = linkKeyGeneratorService;
+    this.storageService = storageService;
   }
 
   index = async (req: Request, res: Response) => {
@@ -41,6 +46,11 @@ export class RootController implements IRootController {
 
     const { serverHost } = this.configService;
     const key = this.linkKeyGeneratorService.generateLinkKey();
+    const linkModel: ITitchLinkModel = {
+      url,
+    };
+
+    this.storageService.save(`${key}.json`, JSON.stringify(linkModel));
 
     res.send({ url: `${serverHost}/${key}` });
   };
