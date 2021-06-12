@@ -5,6 +5,7 @@ import { IConfigService } from '@services';
 
 export interface IStorageService {
   save: (fileName: string, data: string) => void
+  find: (fileName: string) => string | null
 }
 
 @injectable()

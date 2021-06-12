@@ -28,9 +28,29 @@ export class RootController implements IRootController {
   }
 
   index = async (req: Request, res: Response) => {
-    const { rootGreeting } = this.configService;
+    const key = req.query.k;
+    if (!key) {
+      res
+        .status(400)
+        .send({
+          message: 'No key provided',
+        });
+      return;
+    }
 
-    res.send({ message: rootGreeting });
+    const rawData = this.storageService.find(`${key}.json`);
+    if (!rawData) {
+      res
+        .status(404)
+        .send({
+          message: 'Not found',
+        });
+      return;
+    }
+
+    const model: ITitchLinkModel = JSON.parse(rawData);
+
+    res.send({ url: model.url });
   };
 
   post = async (req: Request, res: Response) => {
@@ -52,6 +72,6 @@ export class RootController implements IRootController {
 
     this.storageService.save(`${key}.json`, JSON.stringify(linkModel));
 
-    res.send({ url: `${serverHost}/${key}` });
+    res.send({ url: `${serverHost}/api?k=${key}` });
   };
 }

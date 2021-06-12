@@ -42,7 +42,7 @@ describe('/api', () => {
 
     it('returns an object the titched url', () => {
       expect(subject.body).toStrictEqual({
-        url: 'https://titchlink.com/abcdefgh',
+        url: 'https://titchlink.com/api?k=abcdefgh',
       });
     });
 
