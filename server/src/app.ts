@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import { inject, injectable } from 'inversify';
+import { json as bodyParserJson } from 'body-parser';
 import { IConfigService, IRouteService } from '@services';
 import { TYPES } from '@types';
 
@@ -22,7 +23,7 @@ export class App {
     this.routeService = routeService;
 
     this.app = express();
-    this.setupRoutes();
+    this.setup();
   }
 
   listen = () => {
@@ -31,6 +32,11 @@ export class App {
       console.log(`Listening on port ${port}`);
     });
   };
+
+  private setup = () => {
+    this.app.use(bodyParserJson());
+    this.setupRoutes();
+  }
 
   private setupRoutes = () => {
     this.routeService.setupRoutes(this.app);
