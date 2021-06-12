@@ -5,18 +5,6 @@ describe('/api', () => {
   let subject: Response;
   const url: string = '/api';
 
-  describe('without a body', () => {
-    beforeAll(async () => {
-      jest.clearAllMocks();
-
-      subject = await testRequest.post(url);
-    });
-
-    it('returns 500', () => {
-      expect(subject.status).toBe(500);
-    });
-  });
-
   describe('without a url in the body', () => {
     beforeAll(async () => {
       jest.clearAllMocks();
@@ -24,8 +12,14 @@ describe('/api', () => {
       subject = await (testRequest.post(url).send({}));
     });
 
-    it('returns 500', () => {
-      expect(subject.status).toBe(500);
+    it('returns 400', () => {
+      expect(subject.status).toBe(400);
+    });
+
+    it('returns a message of "No url provided"', () => {
+      expect(subject.body).toStrictEqual({
+        message: 'No url provided',
+      });
     });
   });
 

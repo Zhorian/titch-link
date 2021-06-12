@@ -29,14 +29,13 @@ export class RootController implements IRootController {
   };
 
   post = async (req: Request, res: Response) => {
-    if (!req.body) {
-      res.sendStatus(500);
-      return;
-    }
-
     const { url } = req.body;
     if (!url) {
-      res.sendStatus(500);
+      res
+        .status(400)
+        .send({
+          message: 'No url provided',
+        });
       return;
     }
 
