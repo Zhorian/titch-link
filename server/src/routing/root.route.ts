@@ -32,10 +32,8 @@ export class RootRouter {
      *        required: true
      *        description: The key the url is stored with
      *    responses:
-     *      200:
-     *        description: Success
-     *        schema:
-     *          $ref: "#/definitions/TitchLink"
+     *      302:
+     *        description: Success redirects to the desired url
      *      400:
      *        description: No key provided
      *      404:
