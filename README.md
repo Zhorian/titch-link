@@ -11,3 +11,7 @@ To get a titched link simply post to http://localhost:4774/api with a json body 
 ```
 
 A url will be returned that can be used to retrieve the original url
+
+Setup
+
+Simply run the script `script/setup`. This will set up the docker container.
