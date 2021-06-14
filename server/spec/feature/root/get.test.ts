@@ -60,12 +60,13 @@ describe('/api', () => {
       subject = await testRequest.get(url);
     });
 
-    it('returns 200', () => {
-      expect(subject.status).toBe(200);
+    it('returns 302', () => {
+      expect(subject.status).toBe(302);
     });
 
-    it('returns the id', () => {
-      expect(subject.body).toStrictEqual(content);
+    it('url is in the header', () => {
+      console.log(subject);
+      expect(subject.header.location).toStrictEqual(content.url);
     });
   });
 });

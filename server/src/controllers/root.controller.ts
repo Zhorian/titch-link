@@ -50,7 +50,12 @@ export class RootController implements IRootController {
 
     const model: ITitchLinkModel = JSON.parse(rawData);
 
-    res.send({ url: model.url });
+    // There's a potential to add an extra var for auto redirect
+    // I originally envisioned this being an api that serves a SPA front end
+
+    // res.send({ url: model.url });
+
+    res.redirect(model.url);
   };
 
   post = async (req: Request, res: Response) => {
